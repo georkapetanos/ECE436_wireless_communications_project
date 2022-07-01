@@ -1,1 +1,1 @@
-# ECE436_wireless_communications_project
+# ECE436 wireless communications project
