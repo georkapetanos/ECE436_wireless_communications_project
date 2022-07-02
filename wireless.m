@@ -1,19 +1,15 @@
 format long
-read_time_diff_6083 = readmatrix('nodes6083.txt');
+read_time_diff_6083 = readmatrix('nodes6083.txt'); %first test
 
 time_diff_6083 = read_time_diff_6083 ./ 2;
 mean_calc_time_6083 = mean(time_diff_6083);
 std_calc_time_6083 = std(time_diff_6083);
 
-%real_distance_6083 = sqrt((1.2)^2 + (1.2*6)^2);
-
-read_time_diff_6067 = readmatrix('nodes6067.txt');
+read_time_diff_6067 = readmatrix('nodes6067.txt'); %first test
 
 time_diff_6067 = read_time_diff_6067 ./ 2;
 mean_calc_time_6067 = mean(time_diff_6067);
 std_calc_time_6067 = std(time_diff_6067);
-
-%real_distance_6067 = sqrt((1.2)^2 + (1.2*2)^2);
 
 read_time_diff_6879 = readmatrix('nodes6879.txt'); %medium distance
 
@@ -69,12 +65,6 @@ time_diff_6391_2 = read_time_diff_6391_2 ./2;
 mean_calc_time_6391_2 = mean(time_diff_6391_2);
 std_calc_time_6391_2 = std(time_diff_6391_2);
 
-diff_med = time_diff_8889 - time_diff_6879;
-diff_long = time_diff_8889 - time_diff_5489;
-
-ed_m = norm(diff_med, 2);
-ed_l = norm(diff_long, 2);
-
 pd_6083 = makedist('Normal', 'mu',mean_calc_time_6083,'sigma',std_calc_time_6083);
 pd_6067 = makedist('Normal', 'mu',mean_calc_time_6067, 'sigma',std_calc_time_6067);
 pd_6879 = makedist('Normal', 'mu',mean_calc_time_6879, 'sigma',std_calc_time_6879);
@@ -99,18 +89,21 @@ pdf_5991 = pdf(pd_5991, time_diff_5991);
 pdf_6391 = pdf(pd_6391, time_diff_6391);
 pdf_6391_2 = pdf(pd_6391_2, time_diff_6391_2);
 
-%figure(1)
-%plot(time_diff_6067, pdf_6067, 'b.', time_diff_6083, pdf_6083, 'r.');
-%legend('nodes 60-67', 'nodes 60-83')
+figure(1)
+plot(time_diff_6067, pdf_6067, 'b.', time_diff_6083, pdf_6083, 'r.');
+legend('nodes 60-67', 'nodes 60-83')
 
 figure(2)
-plot(time_diff_9172, pdf_9172, 'r.',time_diff_9179, pdf_9179, 'b.', time_diff_9188, pdf_9188, 'g.', time_diff_5991, pdf_5991, 'c.', time_diff_6391, pdf_6391, 'm.', time_diff_6391_2, pdf_6391_2, 'y.' )
+plot(time_diff_9172, pdf_9172, 'r.',time_diff_9179, pdf_9179, 'b.', time_diff_9188, pdf_9188, 'g.', time_diff_5991, pdf_5991, 'm.')
 legend('9172', '9179', '9188', '5991', '6391', '6391_2')
 
-%figure(3)
-%plot(time_diff_6879, pdf_6879, 'g.', time_diff_5489, pdf_5489, 'b.', time_diff_8889, pdf_8889, 'r.');
-%legend('6879', '5489', '8889')
+figure(3)
+plot(time_diff_6879, pdf_6879, 'g.', time_diff_5489, pdf_5489, 'b.', time_diff_8889, pdf_8889, 'r.');
+axis([0 0.004 0 8000]);
+legend('6879', '5489', '8889')
 
-
+figure(4)
+plot(time_diff_6391, pdf_6391, 'r.', time_diff_6391_2, pdf_6391_2, 'b.' )
+legend('6391 1st test','6391 2nd test')
 
 
